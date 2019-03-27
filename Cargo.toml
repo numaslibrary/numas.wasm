@@ -1,0 +1,7 @@
+[package]
+name = "numas-wasm"
+version = "0.1.0"
+authors = ["Lukáš Zahradník <lukaszahradnik96@seznam.cz>"]
+edition = "2018"
+
+[dependencies]
