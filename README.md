@@ -17,4 +17,4 @@ pub fn test_function_i32(x: i32) -> () {
 pub fn test_function_f32(x: f32) -> () {
 }
 ```
-Basically it repeats parts between tokens `{{generate}}` and `{{/generate}}` and replaces token `{{T}}` with specific type.
+Basically it repeats parts between tokens `{{generate}}` and `{{/generate}}` and replaces token `{{T}}` with specific type. Nested `{{generate}}` tokens are not supported.
