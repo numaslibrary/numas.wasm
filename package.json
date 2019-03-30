@@ -1,6 +1,7 @@
 {
   "name": "numas.wasm",
   "version": "0.1.0",
+  "keywords": ["numas", "numeric", "algebra", "array", "computing", "numpy"],
   "description": "",
   "main": "numas.wasm",
   "scripts": {
