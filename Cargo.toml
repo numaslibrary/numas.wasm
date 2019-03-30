@@ -12,3 +12,6 @@ target="wasm32-unknown-unknown"
 [lib]
 crate-type = ["cdylib"]
 path = "output/main.rs"
+
+[profile.release]
+lto = true
