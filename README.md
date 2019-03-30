@@ -1,9 +1,13 @@
 # numas.wasm
 
-**numas.wasm** is simple tool to generate WebAssembly module from **numas** written in Rust.
+**numas.wasm** is numas compiled to WebAssembly module.
 
-## How it works
-This tool uses simple syntax to handle generics types used in Rust code. 
+## Build
+To build wasm module you need to have node, npm, rust and cargo installed. If you have all of these, you can run `npm run build`
+and script will output `numas.wasm`.
+
+### Generating Rust code
+This tool also generates Rust code (as glue for compiler) which uses simple templating syntax.
 ```
 {{generate}}
 pub fn test_function_{{T}}(x: {{T}}) -> () {
