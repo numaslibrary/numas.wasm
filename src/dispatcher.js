@@ -22,7 +22,8 @@ const dispatch = (filename, dirname = null) => {
             console.log(error)
         } else {
             const res = processor.process(data)
-            fs.writeFile(path.join(out, filename), res, error => {
+
+            fs.writeFile(path.join(out, `${path.parse(filename).name}.rs`), res, error => {
                 if (error) {
                     console.error(error)
                 }
