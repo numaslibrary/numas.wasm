@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-let processer = null
+let processor = null
 let out = null
 
 const setOutput = output => {
@@ -12,16 +12,16 @@ const setOutput = output => {
     out = output
 }
 
-const setProcesser = newProcesser => processer = newProcesser
+const setProcessor = newProcessor => processor = newProcessor
 
-const getProcesser = () => processer
+const getProcessor = () => processor
 
 const dispatch = (filename, dirname = null) => {
     fs.readFile(path.join(dirname, filename), 'utf8', (error, data) => {
         if (error) {
             console.log(error)
         } else {
-            const res = processer.process(data)
+            const res = processor.process(data)
             fs.writeFile(path.join(out, filename), res, error => {
                 if (error) {
                     console.error(error)
@@ -44,7 +44,7 @@ const dispatchAll = dirname => {
 module.exports = {
     dispatch,
     dispatchAll,
-    setProcesser,
-    getProcesser,
+    setProcessor,
+    getProcessor,
     setOutput,
 }

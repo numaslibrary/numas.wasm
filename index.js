@@ -1,6 +1,6 @@
 const d = require('./src/dispatcher')
-const w = require('./src/processer')
+const w = require('./src/processor')
 
-d.setProcesser(w)
+d.setProcessor(w)
 d.setOutput('./output')
 d.dispatchAll('./templates')
