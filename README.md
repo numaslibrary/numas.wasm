@@ -11,7 +11,7 @@ pub fn test_function_{{T}}(x: {{T}}) -> () {
 {{/generate}}
 ```
 Example above generates this output (for configuration generic types `i32`, `f32`)
-```
+```rust
 pub fn test_function_i32(x: i32) -> () {
 }
 pub fn test_function_f32(x: f32) -> () {
