@@ -1,0 +1,22 @@
+
+something else
+
+{{generate}}
+
+#[no_mangle]
+pub fn test_function_{{T}}<{{T}}>() -> TestStruct<{{T}}> {
+
+        let t: {{T}} = dasds
+
+}
+
+{{/generate}}
+
+
+somethig in between
+
+{{generate}}
+pub fn test_function_second{{T}} {
+
+}
+{{/generate}}
