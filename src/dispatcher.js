@@ -37,7 +37,8 @@ const dispatchAll = dirname => {
         if (error) {
             console.error(error)
         } else {
-            files.forEach(file => dispatch(file, dirname))
+            files.filter(file => path.parse(file).ext === '.trs')
+                 .forEach(file => dispatch(file, dirname))
         }
     })
 }
