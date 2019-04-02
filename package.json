@@ -1,12 +1,11 @@
 {
   "name": "numas.wasm",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": ["numas", "numeric", "algebra", "array", "computing", "numpy"],
   "description": "",
-  "main": "numas.wasm",
+  "main": "index.js",
   "scripts": {
-    "build": "node index.js && cargo build --target wasm32-unknown-unknown --release && mv ./target/wasm32-unknown-unknown/release/numas_wasm.wasm ./numas.wasm",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node index.js && cargo build --target wasm32-unknown-unknown --release && cp ./target/wasm32-unknown-unknown/release/numas_wasm.wasm ./numas.wasm"
   },
   "repository": {
     "type": "git",
