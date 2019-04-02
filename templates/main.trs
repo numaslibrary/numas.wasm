@@ -1,6 +1,0 @@
-{{generate}}
-#[no_mangle]
-pub fn test_function_{{T}}(x: {{T}}) -> {{T}} {
-    return x
-}
-{{/generate}}

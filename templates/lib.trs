@@ -1,0 +1,47 @@
+extern crate numas;
+
+use numas::array::Array;
+
+#[inline]
+fn get_pointer<T: Clone>(array: Array<T>) -> *mut Array<T> {
+    return Box::into_raw(Box::new(array));
+}
+
+
+{{generate}}
+
+#[no_mangle]
+pub fn fill_{{T}}(value: {{T}}, size: i32) -> *mut Array<{{T}}> {
+    let array = numas::factory::fill::fill::<{{T}}>(value, vec![size]);
+    return get_pointer(array);
+}
+
+#[no_mangle]
+pub fn zeros_{{T}}(size: i32) -> *const Array<{{T}}> {
+    let array = numas::factory::fill::zeros::<{{T}}>(vec![size]);
+    return get_pointer(array);
+}
+
+#[no_mangle]
+pub fn zeroes_{{T}}(size: i32) -> *const Array<{{T}}> {
+    let array = numas::factory::fill::zeroes::<{{T}}>(vec![size]);
+    return get_pointer(array);
+}
+
+#[no_mangle]
+pub fn ones_{{T}}(size: i32) -> *const Array<{{T}}> {
+    let array = numas::factory::fill::ones::<{{T}}>(vec![size]);
+    return get_pointer(array);
+}
+
+#[no_mangle]
+pub fn len_{{T}}(p: *mut Array<{{T}}>) -> i32 {
+    let mut p = unsafe { Box::from_raw(p) };
+    let l = p.len() as i32;
+    Box::into_raw(p);
+    return l;
+}
+
+{{/generate}}
+
+
