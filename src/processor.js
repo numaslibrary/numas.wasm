@@ -1,5 +1,5 @@
 let configuration = {
-    genericTypes: ['i32', 'i64', 'u32', 'u64', 'f64', 'f32'],
+    genericTypes: ['i32', 'u32', 'f64', 'f32'],
 }
 
 const tokens = {
