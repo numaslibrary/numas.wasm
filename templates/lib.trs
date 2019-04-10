@@ -7,6 +7,12 @@ fn get_pointer<T: Clone>(array: Array<T>) -> *mut Array<T> {
     return Box::into_raw(Box::new(array));
 }
 
+#[no_mangle]
+pub fn instantiate_index_array(length: usize) -> *mut Vec<i32> {
+    let vector = Vec::with_capacity(length);
+    return Box::into_raw(Box::new(vector));
+}
+
 //general
 {{generate}}
 #[no_mangle]
@@ -37,8 +43,8 @@ pub fn len_{{T}}(p: *mut Array<{{T}}>) -> i32 {
 // filling
 {{generate}}
 #[no_mangle]
-pub fn fill_{{T}}(value: {{T}}, size: i32) -> *mut Array<{{T}}> {
-    let array = numas::factory::fill::fill::<{{T}}>(value, vec![size]);
+pub fn full_{{T}}(value: {{T}}, size: i32) -> *mut Array<{{T}}> {
+    let array = numas::factory::fill::full::<{{T}}>(value, vec![size]);
     return get_pointer(array);
 }
 

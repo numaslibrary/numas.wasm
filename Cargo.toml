@@ -5,7 +5,7 @@ authors = ["Lukáš Zahradník <lukaszahradnik96@seznam.cz>"]
 edition = "2018"
 
 [dependencies]
-numas = "0.1.1"
+numas = "0.1.5"
 
 [build]
 target="wasm32-unknown-unknown"
