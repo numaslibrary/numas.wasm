@@ -16,14 +16,14 @@ const setProcessor = newProcessor => processor = newProcessor
 
 const getProcessor = () => processor
 
-const dispatch = (filename, dirname = null) => {
+const dispatch = (filename, dirname = null, top = null) => {
     fs.readFile(path.join(dirname, filename), 'utf8', (error, data) => {
         if (error) {
             console.log(error)
         } else {
             const res = processor.process(data)
 
-            fs.writeFile(path.join(out, `${path.parse(filename).name}.rs`), res, error => {
+            fs.writeFile(path.join(out, top, `${path.parse(filename).name}.rs`), res, error => {
                 if (error) {
                     console.error(error)
                 }
@@ -32,13 +32,27 @@ const dispatch = (filename, dirname = null) => {
     })
 }
 
-const dispatchAll = dirname => {
+const dispatchAll = (dirname, top = '') => {
     fs.readdir(dirname, (error, files) => {
         if (error) {
             console.error(error)
         } else {
-            files.filter(file => path.parse(file).ext === '.trs')
-                 .forEach(file => dispatch(file, dirname))
+            files.forEach(file => {
+                let fullname = path.join(dirname, file)
+                let stats = fs.statSync(fullname)
+
+                if (stats.isDirectory()) {
+                    let directory = path.join(out, top, file) 
+                    
+                    if (!fs.existsSync(directory)) {
+                        fs.mkdirSync(directory)
+                    }
+
+                    dispatchAll(fullname, path.join(top, file))
+                } else if (stats.isFile() && path.parse(file).ext === '.trs') {
+                    dispatch(file, dirname, top)      
+                }
+            })
         }
     })
 }
