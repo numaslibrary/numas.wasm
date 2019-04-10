@@ -7,9 +7,35 @@ fn get_pointer<T: Clone>(array: Array<T>) -> *mut Array<T> {
     return Box::into_raw(Box::new(array));
 }
 
-
+//general
 {{generate}}
+#[no_mangle]
+pub fn view_{{T}}(p: *mut Array<{{T}}>) -> *mut Array<{{T}}> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.view();
+    Box::into_raw(p);
+    return get_pointer(array);
+}
 
+#[no_mangle]
+pub fn clone_{{T}}(p: *mut Array<{{T}}>) -> *mut Array<{{T}}> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = *p.clone();
+    Box::into_raw(p);
+    return get_pointer(array);
+}
+
+#[no_mangle]
+pub fn len_{{T}}(p: *mut Array<{{T}}>) -> i32 {
+    let p = unsafe { Box::from_raw(p) };
+    let l = p.len() as i32;
+    Box::into_raw(p);
+    return l;
+}
+{{/generate}}
+
+// filling
+{{generate}}
 #[no_mangle]
 pub fn fill_{{T}}(value: {{T}}, size: i32) -> *mut Array<{{T}}> {
     let array = numas::factory::fill::fill::<{{T}}>(value, vec![size]);
@@ -33,15 +59,73 @@ pub fn ones_{{T}}(size: i32) -> *const Array<{{T}}> {
     let array = numas::factory::fill::ones::<{{T}}>(vec![size]);
     return get_pointer(array);
 }
-
-#[no_mangle]
-pub fn len_{{T}}(p: *mut Array<{{T}}>) -> i32 {
-    let mut p = unsafe { Box::from_raw(p) };
-    let l = p.len() as i32;
-    Box::into_raw(p);
-    return l;
-}
-
 {{/generate}}
 
+// trigonometric
+{{generate}}
+#[no_mangle]
+pub fn sin_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.sin();
+    Box::into_raw(p); 
+    return get_pointer(array);
+}
 
+#[no_mangle]
+pub fn cos_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.cos();
+    Box::into_raw(p); 
+    return get_pointer(array);
+}
+
+#[no_mangle]
+pub fn arcsin_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.arcsin();
+    Box::into_raw(p); 
+    return get_pointer(array);
+}
+
+#[no_mangle]
+pub fn arccos_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.arccos();
+    Box::into_raw(p); 
+    return get_pointer(array);
+}
+
+#[no_mangle]
+pub fn arctan_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.arctan();
+    Box::into_raw(p); 
+    return get_pointer(array);
+}
+
+#[no_mangle]
+pub fn degrees_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.degrees();
+    Box::into_raw(p); 
+    return get_pointer(array);
+}
+
+#[no_mangle]
+pub fn radians_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.radians();
+    Box::into_raw(p); 
+    return get_pointer(array);
+}
+
+#[no_mangle]
+pub fn deg2rad_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> { 
+    return radians_{{T}}(p);
+}
+
+#[no_mangle]
+pub fn rad2deg_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> { 
+    return degrees_{{T}}(p);
+}
+{{/generate}}
