@@ -1,8 +1,8 @@
 {
   "name": "numas.wasm",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "keywords": ["numas", "numeric", "algebra", "array", "computing", "numpy"],
-  "description": "",
+  "description": "numas multiplatform numerical library as WebAssembly module",
   "main": "index.js",
   "scripts": {
     "build": "node index.js && cargo build --target wasm32-unknown-unknown --release && cp ./target/wasm32-unknown-unknown/release/numas_wasm.wasm ./numas.wasm"
