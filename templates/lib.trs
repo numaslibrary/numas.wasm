@@ -2,6 +2,7 @@ extern crate numas;
 use numas::array::Array;
 
 mod factory;
+mod trigonometric;
 
 #[inline]
 fn get_pointer<T: Clone>(array: Array<T>) -> *mut Array<T> {
@@ -38,74 +39,5 @@ pub fn len_{{T}}(p: *mut Array<{{T}}>) -> i32 {
     let l = p.len() as i32;
     Box::into_raw(p);
     return l;
-}
-{{/generate}}
-
-// trigonometric
-{{generate}}
-#[no_mangle]
-pub fn sin_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
-    let p = unsafe { Box::from_raw(p) };
-    let array = p.sin();
-    Box::into_raw(p); 
-    return get_pointer(array);
-}
-
-#[no_mangle]
-pub fn cos_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
-    let p = unsafe { Box::from_raw(p) };
-    let array = p.cos();
-    Box::into_raw(p); 
-    return get_pointer(array);
-}
-
-#[no_mangle]
-pub fn arcsin_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
-    let p = unsafe { Box::from_raw(p) };
-    let array = p.arcsin();
-    Box::into_raw(p); 
-    return get_pointer(array);
-}
-
-#[no_mangle]
-pub fn arccos_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
-    let p = unsafe { Box::from_raw(p) };
-    let array = p.arccos();
-    Box::into_raw(p); 
-    return get_pointer(array);
-}
-
-#[no_mangle]
-pub fn arctan_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
-    let p = unsafe { Box::from_raw(p) };
-    let array = p.arctan();
-    Box::into_raw(p); 
-    return get_pointer(array);
-}
-
-#[no_mangle]
-pub fn degrees_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
-    let p = unsafe { Box::from_raw(p) };
-    let array = p.degrees();
-    Box::into_raw(p); 
-    return get_pointer(array);
-}
-
-#[no_mangle]
-pub fn radians_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
-    let p = unsafe { Box::from_raw(p) };
-    let array = p.radians();
-    Box::into_raw(p); 
-    return get_pointer(array);
-}
-
-#[no_mangle]
-pub fn deg2rad_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> { 
-    return radians_{{T}}(p);
-}
-
-#[no_mangle]
-pub fn rad2deg_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> { 
-    return degrees_{{T}}(p);
 }
 {{/generate}}
