@@ -10,7 +10,7 @@ fn get_pointer<T: Clone>(array: Array<T>) -> *mut Array<T> {
 }
 
 #[no_mangle]
-pub fn instantiate_index_array(length: usize) -> *mut Vec<i32> {
+pub fn instantiate_shape_array(length: usize) -> *mut Vec<i32> {
     let vector = Vec::with_capacity(length);
     return Box::into_raw(Box::new(vector));
 }
