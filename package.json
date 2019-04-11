@@ -1,6 +1,6 @@
 {
   "name": "numas.wasm",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "keywords": ["numas", "numeric", "algebra", "array", "computing", "numpy"],
   "description": "numas multiplatform numerical library as WebAssembly module",
   "main": "index.js",
