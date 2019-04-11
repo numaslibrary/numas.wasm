@@ -1,13 +1,17 @@
 # numas.wasm
 
-**numas.wasm** is numas compiled to WebAssembly module.
+**numas.wasm** is numas - multiplatform numerical library compiled to WebAssembly module.
+
+## Usage
+To use this in your project import prebuilt module `numas.wasm` as WebAssembly module.
 
 ## Build
-To build wasm module you need to have node, npm, rust and cargo installed. If you have all of these, you can run `npm run build`
-and script will output `numas.wasm`.
+To build project into WebAssembly module you need to have Node, NPM, Cargo and Rust with target `wasm32-unknown-unknow`.
+
+If you have all of these, you can run `npm run build` and script will output `numas.wasm` into root of the project (or in `target/` dir).
 
 ### Generating Rust code
-This tool also generates Rust code (as glue for compiler) which uses simple templating syntax.
+This project is also tool for generating Rust code (as glue for compiler) which uses simple templating syntax.
 ```
 {{generate}}
 pub fn test_function_{{T}}(x: {{T}}) -> () {
