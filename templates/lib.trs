@@ -11,12 +11,17 @@ fn get_pointer<T: Clone>(array: Array<T>) -> *mut Array<T> {
 
 #[no_mangle]
 pub fn instantiate_shape_array(length: usize) -> *mut Vec<i32> {
-    let vector = Vec::with_capacity(length);
+    let vector = vec![0; length];
     return Box::into_raw(Box::new(vector));
 }
 
 //general
 {{generate}}
+#[no_mangle]
+pub fn free_{{T}}(p: *mut Array<{{T}}>) -> () {
+    unsafe { Box::from_raw(p) };
+}
+
 #[no_mangle]
 pub fn view_{{T}}(p: *mut Array<{{T}}>) -> *mut Array<{{T}}> {
     let p = unsafe { Box::from_raw(p) };
