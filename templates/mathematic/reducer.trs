@@ -1,0 +1,22 @@
+extern crate numas;
+use numas::array::Array;
+
+// reducers
+{{generate}}
+#[no_mangle]
+pub fn sum_{{T}}(p: *mut Array<{{T}}>) -> {{T}} {
+    let p = unsafe { Box::from_raw(p) };
+    let sum = p.sum();
+    Box::into_raw(p);
+
+    return sum;
+}
+#[no_mangle]
+pub fn prod_{{T}}(p: *mut Array<{{T}}>) -> {{T}} {
+    let p = unsafe { Box::from_raw(p) };
+    let prod = p.prod();
+    Box::into_raw(p);
+
+    return prod;
+}
+{{/generate}}
