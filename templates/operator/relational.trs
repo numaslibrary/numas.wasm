@@ -1,0 +1,72 @@
+extern crate numas;
+use numas::array::Array;
+
+// arithmetic
+{{generate}}
+#[no_mangle]
+pub fn eq_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const Array<u8> {
+    let first = unsafe { Box::from_raw(first) };
+    let second = unsafe { Box::from_raw(second) };
+    
+    let array = first.eq(second);
+    Box::into_raw(first);
+    Box::into_raw(second);
+
+    return super::get_pointer(array);
+}
+#[no_mangle]
+pub fn neq_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const Array<u8> {
+    let first = unsafe { Box::from_raw(first) };
+    let second = unsafe { Box::from_raw(second) };
+    
+    let array = first.neq(second);
+    Box::into_raw(first);
+    Box::into_raw(second);
+
+    return super::get_pointer(array);
+}
+#[no_mangle]
+pub fn le_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const Array<u8> {
+    let first = unsafe { Box::from_raw(first) };
+    let second = unsafe { Box::from_raw(second) };
+    
+    let array = first.le(second);
+    Box::into_raw(first);
+    Box::into_raw(second);
+
+    return super::get_pointer(array);
+}
+#[no_mangle]
+pub fn ge_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const Array<u8> {
+    let first = unsafe { Box::from_raw(first) };
+    let second = unsafe { Box::from_raw(second) };
+    
+    let array = first.ge(second);
+    Box::into_raw(first);
+    Box::into_raw(second);
+
+    return super::get_pointer(array);
+}
+#[no_mangle]
+pub fn gt_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const Array<u8> {
+    let first = unsafe { Box::from_raw(first) };
+    let second = unsafe { Box::from_raw(second) };
+    
+    let array = first.gt(second);
+    Box::into_raw(first);
+    Box::into_raw(second);
+
+    return super::get_pointer(array);
+}
+#[no_mangle]
+pub fn lt_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const Array<u8> {
+    let first = unsafe { Box::from_raw(first) };
+    let second = unsafe { Box::from_raw(second) };
+    
+    let array = first.lt(second);
+    Box::into_raw(first);
+    Box::into_raw(second);
+
+    return super::get_pointer(array);
+}
+{{/generate}}
