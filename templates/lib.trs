@@ -1,48 +1,29 @@
 extern crate numas;
 use numas::array::Array;
 
+mod array;
 mod factory;
-mod trigonometric;
+mod mathematic;
 
 #[inline]
 fn get_pointer<T: Clone>(array: Array<T>) -> *mut Array<T> {
     return Box::into_raw(Box::new(array));
 }
 
-#[no_mangle]
-pub fn instantiate_shape_array(length: usize) -> *mut Vec<i32> {
-    let vector = vec![0; length];
-    return Box::into_raw(Box::new(vector));
-}
-
 //general
 {{generate}}
 #[no_mangle]
-pub fn free_{{T}}(p: *mut Array<{{T}}>) -> () {
+pub fn instantiate_vector_{{T}}(length: usize) -> *mut Vec<{{T}}> {
+    let mut vector: Vec<{{T}}> = Vec::with_capacity(length);
+    
+    unsafe {
+        vector.set_len(length);
+    };
+
+    return Box::into_raw(Box::new(vector));
+}
+#[no_mangle]
+pub fn free_vector_{{T}}(p: *mut Vec<{{T}}>) -> () {
     unsafe { Box::from_raw(p) };
-}
-
-#[no_mangle]
-pub fn view_{{T}}(p: *mut Array<{{T}}>) -> *mut Array<{{T}}> {
-    let p = unsafe { Box::from_raw(p) };
-    let array = p.view();
-    Box::into_raw(p);
-    return get_pointer(array);
-}
-
-#[no_mangle]
-pub fn clone_{{T}}(p: *mut Array<{{T}}>) -> *mut Array<{{T}}> {
-    let p = unsafe { Box::from_raw(p) };
-    let array = *p.clone();
-    Box::into_raw(p);
-    return get_pointer(array);
-}
-
-#[no_mangle]
-pub fn len_{{T}}(p: *mut Array<{{T}}>) -> i32 {
-    let p = unsafe { Box::from_raw(p) };
-    let l = p.len() as i32;
-    Box::into_raw(p);
-    return l;
 }
 {{/generate}}
