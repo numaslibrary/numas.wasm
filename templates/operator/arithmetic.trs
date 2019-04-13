@@ -8,7 +8,7 @@ pub fn add_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const 
     let first = unsafe { Box::from_raw(first) };
     let second = unsafe { Box::from_raw(second) };
     
-    let array = first + second;
+    let array = &*first + &*second;
     Box::into_raw(first);
     Box::into_raw(second);
 
@@ -19,7 +19,8 @@ pub fn addAssign_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *
     let first = unsafe { Box::from_raw(first) };
     let second = unsafe { Box::from_raw(second) };
     
-    first += second;
+    let mut temp = &*first;
+    temp += &*second;
     Box::into_raw(second);
 
     return Box::into_raw(first);
@@ -29,7 +30,7 @@ pub fn sub_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const 
     let first = unsafe { Box::from_raw(first) };
     let second = unsafe { Box::from_raw(second) };
     
-    let array = first * second;
+    let array = &*first * &*second;
     Box::into_raw(first);
     Box::into_raw(second);
 
@@ -40,7 +41,8 @@ pub fn subAssign_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *
     let first = unsafe { Box::from_raw(first) };
     let second = unsafe { Box::from_raw(second) };
     
-    first -= second;
+    let mut temp = &*first;
+    temp -= &*second;
     Box::into_raw(second);
 
     return Box::into_raw(first);
@@ -50,7 +52,7 @@ pub fn mul_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const 
     let first = unsafe { Box::from_raw(first) };
     let second = unsafe { Box::from_raw(second) };
     
-    let array = first * second;
+    let array = &*first * &*second;
     Box::into_raw(first);
     Box::into_raw(second);
 
@@ -61,7 +63,8 @@ pub fn mulAssign_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *
     let first = unsafe { Box::from_raw(first) };
     let second = unsafe { Box::from_raw(second) };
     
-    first *= second;
+    let mut temp = &*first;
+    temp *= &*second;
     Box::into_raw(second);
 
     return Box::into_raw(first);
@@ -71,7 +74,7 @@ pub fn div_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const 
     let first = unsafe { Box::from_raw(first) };
     let second = unsafe { Box::from_raw(second) };
     
-    let array = first / second;
+    let array = &*first / &*second;
     Box::into_raw(first);
     Box::into_raw(second);
 
@@ -82,16 +85,10 @@ pub fn divAssign_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *
     let first = unsafe { Box::from_raw(first) };
     let second = unsafe { Box::from_raw(second) };
     
-    first /= second;
+    let mut temp = &*first;
+    temp /= &*second;
     Box::into_raw(second);
 
-    return Box::into_raw(first);
-}
-#[no_mangle]
-pub fn neg_{{T}}(array: *mut Array<{{T}}>) -> *const Array<{{T}}> {
-    let first = unsafe { Box::from_raw(array) };
-    f = -f;
-    
     return Box::into_raw(first);
 }
 {{/generate}}

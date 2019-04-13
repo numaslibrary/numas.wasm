@@ -5,6 +5,7 @@ use numas::array::Array;
 
 mod array;
 mod factory;
+mod operator;
 mod mathematic;
 
 #[inline]

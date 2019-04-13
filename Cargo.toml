@@ -1,11 +1,11 @@
 [package]
 name = "numas-wasm"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["Lukáš Zahradník <lukaszahradnik96@seznam.cz>"]
 edition = "2018"
 
 [dependencies]
-numas = "0.1.5"
+numas = "0.1.8"
 
 [build]
 target="wasm32-unknown-unknown"

@@ -8,7 +8,7 @@ pub fn eq_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const A
     let first = unsafe { Box::from_raw(first) };
     let second = unsafe { Box::from_raw(second) };
     
-    let array = first.eq(second);
+    let array = first.eq(&*second);
     Box::into_raw(first);
     Box::into_raw(second);
 
@@ -19,7 +19,7 @@ pub fn neq_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const 
     let first = unsafe { Box::from_raw(first) };
     let second = unsafe { Box::from_raw(second) };
     
-    let array = first.neq(second);
+    let array = first.neq(&*second);
     Box::into_raw(first);
     Box::into_raw(second);
 
@@ -30,7 +30,7 @@ pub fn le_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const A
     let first = unsafe { Box::from_raw(first) };
     let second = unsafe { Box::from_raw(second) };
     
-    let array = first.le(second);
+    let array = first.le(&*second);
     Box::into_raw(first);
     Box::into_raw(second);
 
@@ -41,7 +41,7 @@ pub fn ge_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const A
     let first = unsafe { Box::from_raw(first) };
     let second = unsafe { Box::from_raw(second) };
     
-    let array = first.ge(second);
+    let array = first.ge(&*second);
     Box::into_raw(first);
     Box::into_raw(second);
 
@@ -52,7 +52,7 @@ pub fn gt_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const A
     let first = unsafe { Box::from_raw(first) };
     let second = unsafe { Box::from_raw(second) };
     
-    let array = first.gt(second);
+    let array = first.gt(&*second);
     Box::into_raw(first);
     Box::into_raw(second);
 
@@ -63,7 +63,7 @@ pub fn lt_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const A
     let first = unsafe { Box::from_raw(first) };
     let second = unsafe { Box::from_raw(second) };
     
-    let array = first.lt(second);
+    let array = first.lt(&*second);
     Box::into_raw(first);
     Box::into_raw(second);
 
