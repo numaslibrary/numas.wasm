@@ -1,0 +1,68 @@
+extern crate numas;
+use numas::array::Array;
+
+// array
+{{generate}}
+#[no_mangle]
+pub fn new_{{T}}(data: *mut Vec<{{T}}>, shape: *mut Vec<i32>) -> *mut Array<{{T}}> {
+    let data = unsafe { Box::from_raw(data) };
+    let shape = unsafe { Box::from_raw(shape) };
+    let array = Array::new(*data, *shape);
+
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
+pub fn free_{{T}}(p: *mut Array<{{T}}>) -> () {
+    unsafe { Box::from_raw(p) };
+}
+
+#[no_mangle]
+pub fn reshape_{{T}}(p: *mut Array<{{T}}>, shape: *mut Vec<i32>) -> *mut Array<{{T}}> {
+    let mut p = unsafe { Box::from_raw(p) };
+    let shape = unsafe { Box::from_raw(shape) };
+
+    p.reshape(*shape);
+    return Box::into_raw(p);
+}
+
+#[no_mangle]
+pub fn fill_{{T}}(p: *mut Array<{{T}}>, value: {{T}}) -> *mut Array<{{T}}> {
+    let p = unsafe { Box::from_raw(p) };
+    p.fill(value);
+
+    return Box::into_raw(p);
+}
+
+#[no_mangle]
+pub fn view_{{T}}(p: *mut Array<{{T}}>) -> *mut Array<{{T}}> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.view();
+    Box::into_raw(p);
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
+pub fn clone_{{T}}(p: *mut Array<{{T}}>) -> *mut Array<{{T}}> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = *p.clone();
+    Box::into_raw(p);
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
+pub fn len_{{T}}(p: *mut Array<{{T}}>) -> i32 {
+    let p = unsafe { Box::from_raw(p) };
+    let l = p.len() as i32;
+    Box::into_raw(p);
+    return l;
+}
+
+#[no_mangle]
+pub fn baseLen_{{T}}(p: *mut Array<{{T}}>) -> i32 {
+    let p = unsafe { Box::from_raw(p) };
+    let l = p.base_len() as i32;
+    Box::into_raw(p);
+    return l;
+}
+{{/generate}}
