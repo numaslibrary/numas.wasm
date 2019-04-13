@@ -1,0 +1,103 @@
+extern crate numas;
+use numas::array::Array;
+
+// arithmetic
+{{generate}}
+#[no_mangle]
+pub fn add_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const Array<{{T}}> {
+    let f = unsafe { Box::from_raw(first) };
+    let s = unsafe { Box::from_raw(second) };
+    
+    let array = f + s;
+    Box::into_raw(first);
+    Box::into_raw(second);
+
+    return super::get_pointer(array);
+}
+#[no_mangle]
+pub fn addAssign_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const Array<{{T}}> {
+    let f = unsafe { Box::from_raw(first) };
+    let s = unsafe { Box::from_raw(second) };
+    
+    let f += s;
+    Box::into_raw(first);
+    Box::into_raw(second);
+
+    return first;
+}
+#[no_mangle]
+pub fn sub_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const Array<{{T}}> {
+    let f = unsafe { Box::from_raw(first) };
+    let s = unsafe { Box::from_raw(second) };
+    
+    let array = f * s;
+    Box::into_raw(first);
+    Box::into_raw(second);
+
+    return super::get_pointer(array);
+}
+#[no_mangle]
+pub fn subAssign_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const Array<{{T}}> {
+    let f = unsafe { Box::from_raw(first) };
+    let s = unsafe { Box::from_raw(second) };
+    
+    let f -= s;
+    Box::into_raw(first);
+    Box::into_raw(second);
+
+    return first;
+}
+#[no_mangle]
+pub fn mul_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const Array<{{T}}> {
+    let f = unsafe { Box::from_raw(first) };
+    let s = unsafe { Box::from_raw(second) };
+    
+    let array = f * s;
+    Box::into_raw(first);
+    Box::into_raw(second);
+
+    return super::get_pointer(array);
+}
+#[no_mangle]
+pub fn mulAssign_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const Array<{{T}}> {
+    let f = unsafe { Box::from_raw(first) };
+    let s = unsafe { Box::from_raw(second) };
+    
+    let f *= s;
+    Box::into_raw(first);
+    Box::into_raw(second);
+
+    return first;
+}
+#[no_mangle]
+pub fn div_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const Array<{{T}}> {
+    let f = unsafe { Box::from_raw(first) };
+    let s = unsafe { Box::from_raw(second) };
+    
+    let array = f / s;
+    Box::into_raw(first);
+    Box::into_raw(second);
+
+    return super::get_pointer(array);
+}
+#[no_mangle]
+pub fn divAssign_{{T}}(first: *mut Array<{{T}}>, second: *mut Array<{{T}}>) -> *const Array<{{T}}> {
+    let f = unsafe { Box::from_raw(first) };
+    let s = unsafe { Box::from_raw(second) };
+    
+    let f /= s;
+    Box::into_raw(first);
+    Box::into_raw(second);
+
+    return first;
+}
+#[no_mangle]
+pub fn neg_{{T}}(array: *mut Array<{{T}}>) -> *const Array<{{T}}> {
+    let f = unsafe { Box::from_raw(array) };
+    f = -f;
+
+    Box::into_raw(first);
+    
+    return first;
+}
+{{/generate}}
