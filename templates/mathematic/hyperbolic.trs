@@ -1,0 +1,45 @@
+extern crate numas;
+use numas::array::Array;
+
+// trigonometric
+{{generate}}
+#[no_mangle]
+pub fn sinh_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.sinh();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
+pub fn cosh_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.cosh();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
+pub fn arcsinh_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.arcsinh();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
+pub fn arccosh_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.arccosh();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
+pub fn arctanh_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.arctanh();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+{{/generate}}
