@@ -5,7 +5,7 @@ authors = ["Lukáš Zahradník <lukaszahradnik96@seznam.cz>"]
 edition = "2018"
 
 [dependencies]
-numas = "0.1.8"
+numas = "0.2.1"
 
 [build]
 target="wasm32-unknown-unknown"
@@ -13,3 +13,7 @@ target="wasm32-unknown-unknown"
 [lib]
 crate-type = ["cdylib"]
 path = "output/lib.rs"
+
+[profile.release]
+opt-level = 3
+lto = true
