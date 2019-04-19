@@ -6,3 +6,4 @@ mod reducer;
 mod round;
 mod logarithm;
 mod miscellaneous;
+mod exponential;

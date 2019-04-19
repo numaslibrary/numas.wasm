@@ -1,7 +1,6 @@
 extern crate numas;
 use numas::array::Array;
 
-// rounding
 {{generate}}
 #[no_mangle]
 pub fn log_{{T}}(p: *mut Array<{{T}}>, base: f64) -> *const Array<f64> {

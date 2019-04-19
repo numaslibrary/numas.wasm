@@ -1,7 +1,6 @@
 extern crate numas;
 use numas::array::Array;
 
-// rounding
 {{generate}}
 #[no_mangle]
 pub fn sqrt_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {

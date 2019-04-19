@@ -1,0 +1,28 @@
+extern crate numas;
+use numas::array::Array;
+
+{{generate}}
+#[no_mangle]
+pub fn exp_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.exp();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
+pub fn expm1_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.exp_m1();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
+pub fn exp2_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.exp2();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+{{/generate}}
