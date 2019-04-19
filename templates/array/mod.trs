@@ -65,4 +65,29 @@ pub fn baseLen_{{T}}(p: *mut Array<{{T}}>) -> i32 {
     Box::into_raw(p);
     return l;
 }
+
+#[no_mangle]
+pub fn collect_{{T}}(p: *mut Array<{{T}}>) -> *mut Vec<{{T}}> {
+    let p = unsafe { Box::from_raw(p) };
+    let vector = p.collect();
+    Box::into_raw(p);
+    return Box::into_raw(Box::new(vector));
+}
+
+#[no_mangle]
+pub fn set_{{T}}(p: *mut Array<{{T}}>, indices: *mut Vec<usize>, value: {{T}}) -> () {
+    let p = unsafe { Box::from_raw(p) };
+    let indices = unsafe { Box::from_raw(indices) };
+    p.set(*indices, value);
+    Box::into_raw(p);
+}
+
+#[no_mangle]
+pub fn get_{{T}}(p: *mut Array<{{T}}>, indices: *mut Vec<usize>) -> *mut Array<{{T}}> {
+    let p = unsafe { Box::from_raw(p) };
+    let indices = unsafe { Box::from_raw(indices) };
+    let array = p.get(*indices);
+    Box::into_raw(p);
+    return super::get_pointer(array);
+}
 {{/generate}}
