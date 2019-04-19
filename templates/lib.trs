@@ -13,6 +13,23 @@ fn get_pointer<T: Clone>(array: Array<T>) -> *mut Array<T> {
     return Box::into_raw(Box::new(array));
 }
 
+
+#[no_mangle]
+pub fn instantiate_vector_usize(length: usize) -> *mut Vec<usize> {
+    let mut vector: Vec<usize> = Vec::with_capacity(length);
+    
+    unsafe {
+        vector.set_len(length);
+    };
+
+    return Box::into_raw(Box::new(vector));
+}
+
+#[no_mangle]
+pub fn free_vector_usize(p: *mut Vec<usize>) -> () {
+    unsafe { Box::from_raw(p) };
+}
+
 //general
 {{generate}}
 #[no_mangle]
@@ -30,14 +47,3 @@ pub fn free_vector_{{T}}(p: *mut Vec<{{T}}>) -> () {
     unsafe { Box::from_raw(p) };
 }
 {{/generate}}
-
-#[no_mangle]
-pub fn instantiate_vector_usize(length: usize) -> *mut Vec<usize> {
-    let mut vector: Vec<usize> = Vec::with_capacity(length);
-    
-    unsafe {
-        vector.set_len(length);
-    };
-
-    return Box::into_raw(Box::new(vector));
-}
