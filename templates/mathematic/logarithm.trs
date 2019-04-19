@@ -1,0 +1,37 @@
+extern crate numas;
+use numas::array::Array;
+
+// rounding
+{{generate}}
+#[no_mangle]
+pub fn log_{{T}}(p: *mut Array<{{T}}>, base: f64) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.log(base);
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
+pub fn log10_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.log10();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
+pub fn log2_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.log2();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
+pub fn loge_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.loge();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+{{/generate}}
