@@ -1,0 +1,37 @@
+extern crate numas;
+use numas::array::Array;
+
+// rounding
+{{generate}}
+#[no_mangle]
+pub fn round_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.round();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
+pub fn ceil_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.ceil();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
+pub fn floor_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.floor();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
+pub fn trunc_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.trunc();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+{{/generate}}
