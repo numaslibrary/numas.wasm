@@ -1,0 +1,13 @@
+extern crate numas;
+use numas::array::Array;
+
+// rounding
+{{generate}}
+#[no_mangle]
+pub fn sqrt_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.sqrt();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+{{/generate}}

@@ -5,3 +5,4 @@ mod hyperbolic;
 mod reducer;
 mod round;
 mod logarithm;
+mod miscellaneous;
