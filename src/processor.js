@@ -37,6 +37,8 @@ const process = data => {
 
     if (result.length === 0) {
         result.push(data)   
+    } else {
+        result.push(data.substring(oldEnd, data.length))
     }
 
     return result.join('\n').replace(/\n{2,}/g, '\n')
