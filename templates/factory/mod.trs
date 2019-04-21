@@ -15,7 +15,7 @@ pub fn arange(start: f64, stop: f64, step: f64) -> *mut Array<f64> {
 }
 
 #[no_mangle]
-pub fn logpsace(start: f64, stop: f64, base: f64, num: usize) -> *mut Array<f64> {
+pub fn logspace(start: f64, stop: f64, base: f64, num: usize) -> *mut Array<f64> {
     let array = numas::factory::numeric::logspace(start, stop, base, num);
     return super::get_pointer(array);
 }
