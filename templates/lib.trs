@@ -9,7 +9,7 @@ mod operator;
 mod mathematic;
 
 #[inline]
-fn get_pointer<T: Clone>(array: Array<T>) -> *mut Array<T> {
+fn get_pointer<T: Copy>(array: Array<T>) -> *mut Array<T> {
     return Box::into_raw(Box::new(array));
 }
 

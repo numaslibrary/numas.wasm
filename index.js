@@ -12,7 +12,6 @@ if (require.main === module) {
     build('./templates', './output')
 }
 
-
 module.exports = {
     build,
 }
