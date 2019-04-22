@@ -20,6 +20,14 @@ pub fn cos_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
 }
 
 #[no_mangle]
+pub fn tan_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.cos();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
 pub fn arcsin_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
     let p = unsafe { Box::from_raw(p) };
     let array = p.arcsin();
@@ -57,15 +65,5 @@ pub fn radians_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
     let array = p.radians();
     Box::into_raw(p); 
     return super::get_pointer(array);
-}
-
-#[no_mangle]
-pub fn deg2rad_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> { 
-    return radians_{{T}}(p);
-}
-
-#[no_mangle]
-pub fn rad2deg_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> { 
-    return degrees_{{T}}(p);
 }
 {{/generate}}

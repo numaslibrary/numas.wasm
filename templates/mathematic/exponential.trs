@@ -1,7 +1,5 @@
 extern crate numas;
 use numas::array::Array;
-
-{{generate}}
 //#[no_mangle]
 //pub fn exp_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
 //    let p = unsafe { Box::from_raw(p) };
@@ -25,4 +23,3 @@ use numas::array::Array;
 //    Box::into_raw(p); 
 //    return super::get_pointer(array);
 //}
-{{/generate}}

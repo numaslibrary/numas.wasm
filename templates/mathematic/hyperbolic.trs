@@ -1,7 +1,7 @@
 extern crate numas;
 use numas::array::Array;
 
-// trigonometric
+// hyperbolic
 {{generate}}
 #[no_mangle]
 pub fn sinh_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
@@ -15,6 +15,14 @@ pub fn sinh_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
 pub fn cosh_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
     let p = unsafe { Box::from_raw(p) };
     let array = p.cosh();
+    Box::into_raw(p); 
+    return super::get_pointer(array);
+}
+
+#[no_mangle]
+pub fn tanh_{{T}}(p: *mut Array<{{T}}>) -> *const Array<f64> {
+    let p = unsafe { Box::from_raw(p) };
+    let array = p.tanh();
     Box::into_raw(p); 
     return super::get_pointer(array);
 }
