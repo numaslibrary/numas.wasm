@@ -28,9 +28,12 @@ pub fn reshape_{{T}}(p: *mut Array<{{T}}>, shape: *mut Vec<i32>) -> *mut Array<{
 
 #[no_mangle]
 pub fn shape_{{T}}(p: *mut Array<{{T}}>) -> *mut Vec<i32> {
-    let array = unsafe { Box::from_raw(p) };
+    let p = unsafe { Box::from_raw(p) };
+    let shape = p.get_shape().clone();
 
-    return Box::into_raw(Box::new(array.get_shape().clone()));
+    Box::into_raw(p);
+
+    return Box::into_raw(Box::new(shape));
 }
 
 #[no_mangle]

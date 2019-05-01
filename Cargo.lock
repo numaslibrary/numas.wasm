@@ -36,7 +36,7 @@ dependencies = [
 
 [[package]]
 name = "numas-wasm"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "numas 0.2.5 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
